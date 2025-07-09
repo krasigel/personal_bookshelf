@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/rate.css' %}">
+    
+  
+   
+{% endblock %}
+
+{% block title %}
+  <h1>{{ book.title }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="book-detail-container">
+    <h1 class="book-detail-title">{{ book.title }}</h1>
+    <p class="book-detail-meta">
+        By {{ book.author }} on {{ book.created_at|date:"d M Y" }}
+    </p>
+    <img src="{{ book.image.url }}" alt="Image for {{ book.title }}" class="book-detail-image">
+    <div class="book-detail-review">
+        {{ book.review|linebreaks }}
+  
+        <h3>Average Rating:</h3>
+            {% if avg_rating %}
+                <p>
+                {% for i in "12345" %}
+                    {% if i|add:"0" <= avg_rating %}
+                        ⭐
+                    {% else %}
+                        ☆
+                    {% endif %}
+                {% endfor %}
+                ({{ avg_rating|floatformat:1 }} / 5)
+                </p>
+            {% else %}
+                <p>No ratings yet.</p>
+            {% endif %}
+        {% if book.is_recommended %}
+            <p class="recommended-status">⭐ Recommended by {{ book.owner.username|capfirst }}</p>
+        {% else %}
+            <p class="norecommended-status">❌ Not Recommended by {{ book.owner.username|capfirst }}</p>
+        {% endif %}
+        
+    </div>
+    </div>
+ 
+{% endblock %}

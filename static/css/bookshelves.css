@@ -1,0 +1,45 @@
+.bookshelf-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bookshelf-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;        /* фиксирана ширина за еднакви колони */
+  min-height: 250px;   /* фиксирана височина */
+  margin: 10px;
+}
+
+.bookshelf-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #b8372f;
+}
+
+.bookshelf-card p {
+  font-size: 18px;
+  flex-grow: 1;   /* заема наличното място и избутва бутона надолу */
+
+}
+
+.bookshelf-card .view-button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #3e6a73;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.bookshelf-card .view-button:hover {
+  background-color: #d94b41;
+}
+

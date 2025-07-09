@@ -1,0 +1,86 @@
+.form-container {
+  background: #3e6a73;
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  margin: 30px auto;
+}
+
+.form-container h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 12px;
+
+}
+
+.form-container input[type="file"] {
+  padding: 3px;
+  background: white;
+  color: #333;
+}
+
+.form-container button {
+  padding: 10px 16px;
+  background: #b8372f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+  background: #b8372f;
+
+}
+
+.form-container a {
+  color: white;
+}
+
+.form-container a:hover {
+  color: #ffcccb;
+}
+.button-login {
+  background-color: #d94b41;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.button-login:hover {
+  background-color: #3e6a73;
+}
+

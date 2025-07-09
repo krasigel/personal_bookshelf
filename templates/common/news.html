@@ -1,0 +1,34 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block title %}
+    <h1>Latest News</h1>
+{% endblock %}
+
+{% block content %}
+<div class="news-container">
+  
+  {% for article in articles %}
+        <div class="news-card">  
+            <h2>{{ article.title }}</h2>
+
+            <img src="{{ article.image.url }}" alt="Image for {{ article.title }}" class="article-image"/>
+
+            <p><em>By {{ article.author.username }} on {{ article.created_at|date:"d M Y" }}</em></p>
+            <p class="article-extract">{{ article.content|truncatechars:250 }}</p> 
+            <div class="news-button">
+                <a href="{% url 'article_detail' article.pk %}">Read more</a>  
+            </div>
+        </div>
+  {% empty %}
+    <p>No news published yet.</p>
+  {% endfor %}
+</div>     
+{% endblock %}
+

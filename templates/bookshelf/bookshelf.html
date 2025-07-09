@@ -1,0 +1,132 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block css_files %}
+    
+  <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+   
+{% endblock %}
+
+{% block title %}
+  <title>
+    {% if bookshelf_owner %}
+      {{ bookshelf_owner.username|capfirst }}'s Bookshelf
+    {% else %}
+      My Bookshelf
+    {% endif %}
+  </title>
+{% endblock %}
+
+{% block content %}
+
+<h1 style="margin-left:30px;">
+  {% if bookshelf_owner %}
+    {{ bookshelf_owner.username|capfirst }}'s Bookshelf
+  {% else %}
+    My Bookshelf
+  {% endif %}
+</h1>
+
+{% if not bookshelf_owner or bookshelf_owner == request.user %}
+<div class="add-book-button">
+  <a href="{% url 'book_add' %}">+ Add a New Book</a>
+</div>
+{% endif %}
+
+
+<div class="bookshelf-container">
+  {% for obj in books %}
+    {% if obj.book %}
+    {# Ако е BookshelfItem #}
+        {% with b=obj.book %}
+            <div class="book-card">
+                <p><strong>#{{ forloop.counter }}</strong></p>
+                <img src="{{ b.image.url }}" alt="Book cover">
+                <h3 class="book-title">{{ b.title }}</h3>
+                <p class="book-author">by {{ b.author }}</p>
+
+                Average Rating:
+                {% if obj.avg_rating %}
+                    {% for i in "12345" %}
+                        {% if i|add:""|add:"0" <= obj.avg_rating %}
+                            ⭐
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    No ratings yet.
+                {% endif %}
+
+                <a href="{% url 'book_rate' b.pk %}">Rate this book</a>
+                <p class="book-genre">Genre: {{ b.genre }}</p>
+                {% if b.is_recommended %}
+                    <p class="recommended-status">⭐ Recommended</p>
+                {% else %}
+                    <p class="norecommended-status">❌ Not Recommended</p>
+                {% endif %}
+                <p class="review-text">{{ b.review|truncatechars:150 }}...</p>
+                <div class="card-buttons">
+                    <a href="{% url 'book_detail' b.pk %}">Read more</a>
+                    {% if request.user == b.owner %}
+                        <a href="{% url 'book_edit' b.pk %}">Edit</a>
+                        <a href="{% url 'book_delete' b.pk %}">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        {% endwith %}
+    {% else %}
+    {# Ако е директно Book #}
+        {% with b=obj %}
+            <div class="book-card">
+                <p><strong>#{{ forloop.counter }}</strong></p>
+                <img src="{{ b.image.url }}" alt="Book cover">
+                <h3 class="book-title">{{ b.title }}</h3>
+                <p class="book-author">by {{ b.author }}</p>
+
+                <p class="book-rating">
+                    Average Rating:
+                    {% if b.avg_rating %}
+                        {% for i in "12345" %}
+                            {% if i|add:""|add:"0" <= b.avg_rating %}
+                                ⭐
+                            {% else %}
+                                ☆
+                            {% endif %}
+                        {% endfor %}
+                        ({{ b.avg_rating|floatformat:1 }})
+                    {% else %}
+                        No ratings yet.
+                    {% endif %}
+                </p>
+                <a href="{% url 'book_rate' b.pk %}">Rate this book</a>
+                <p class="book-genre">Genre: {{ b.genre }}</p>
+                {% if b.is_recommended %}
+                    <p class="recommended-status">⭐ Recommended</p>
+                {% else %}
+                    <p class="norecommended-status">❌ Not Recommended</p>
+                {% endif %}
+                <p class="review-text">{{ b.review|truncatechars:150 }}...</p>
+                <div class="card-buttons">
+                    <a href="{% url 'book_detail' b.pk %}">Read more</a>
+                    {% if request.user == b.owner %}
+                        <a href="{% url 'book_edit' b.pk %}">Edit</a>
+                        <a href="{% url 'book_delete' b.pk %}">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+   
+
+
+
+
+

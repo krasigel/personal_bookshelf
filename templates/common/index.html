@@ -1,0 +1,36 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    {% if user.is_authenticated %}
+        <h1 class="link-title"><a href="{% url 'bookshelf' %}">Welcome to My Personal Bookshelf!</a></h1>
+    {% else %}
+        <h1>Welcome to My Personal Bookshelf</h1>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+        <div class="image-container">
+            <img src="{% static "images/bookshelf.png" %}" alt="bookshelf_index" />
+        </div>
+        <div class="text-introduction">
+            <h2>Your reading journey, remembered.</h2>
+            <p>This is more than just a bookshelf — it's your personal space to register, reflect, and relive
+                the books you've read. Create your own digital library, add books
+                as you go, and capture your thoughts, emotions, and insights.
+                As you read, you can note down details about the book, the author,
+                your personal feedback, whether you'd recommend it,
+                and a full review. It’s a meaningful way to organize
+                your reading history and preserve the feelings each book evoked.
+            Even if you're not registered, you're welcome to explore the shelves —
+                read others’ reviews, gather inspiration, and discover your
+                next great read.</p>
+        </div>
+
+{% endblock %}

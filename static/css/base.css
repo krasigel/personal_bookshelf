@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0 auto;
+}
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+#header_menu header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.logo-text {
+    font-size: 20px;
+    margin-top: 5px;
+    color: #d94b41;
+
+}
+.logo-text a {
+    text-decoration: none;
+}
+.logo-text:hover {
+    color: #3e6a73;
+}
+
+#logo_image {
+  height: 100px;
+  border-radius: 50px;
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.main_navigation {
+  display: flex;
+  gap: 20px;
+
+}
+
+/* Menu links */
+.main_navigation a {
+  padding-right: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: normal;
+  color: #333;
+}
+
+.main_navigation a:hover {
+    color: #d94b41;
+}
+
+/* Register button */
+.register-button {
+  background-color: #3e6a73;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.register-button:hover {
+    background-color: #d94b41;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
