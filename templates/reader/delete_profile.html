@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block title %}
+  <title>Delete Profile</title>
+{% endblock %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Delete Your Profile</h2>
+
+    <p>Are you sure you want to delete your account, <strong>{{ request.user.username }}</strong>?<br>
+       This action cannot be undone.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="delete-btn">Yes, delete my account</button>
+      <a href="{% url 'bookshelf' %}" class="cancel-link">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

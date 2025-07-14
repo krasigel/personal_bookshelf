@@ -5,6 +5,7 @@
     
   <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">  
    
 {% endblock %}
 
@@ -29,9 +30,29 @@
 </h1>
 
 {% if not bookshelf_owner or bookshelf_owner == request.user %}
-<div class="add-book-button">
-  <a href="{% url 'book_add' %}">+ Add a New Book</a>
-</div>
+    <div class="user-profile-container">
+        <div class="user-profile">
+            {% if request.user.avatar %}
+              <img src="{{ request.user.avatar.url }}" alt="Avatar" class="avatar-img">
+            {% endif %}
+            <div class="user-info">
+              <p><strong>Username:</strong> {{ request.user.username }}</p>
+              <p><strong>First Name:</strong> {{ request.user.first_name }}</p>
+              <p><strong>Last Name:</strong> {{ request.user.last_name }}</p>
+              <p><strong>Email:</strong> {{ request.user.email }}</p>
+              <p><strong>Age:</strong> {{ request.user.age }}</p>
+              <p><strong>Favourite Genres:</strong> {{ request.user.favourite_genres }}</p>
+            </div>
+            <div class="profile-buttons">
+              <a href="{% url 'edit_profile' %}" class="edit-btn">Edit Profile</a>
+              <a href="{% url 'delete_profile' %}" class="delete-btn">Delete Profile</a>
+              <div class="add-book-button">
+                <a href="{% url 'book_add' %}">+ Add a New Book</a>
+              </div>
+            </div>
+        </div>
+    </div>
+
 {% endif %}
 
 

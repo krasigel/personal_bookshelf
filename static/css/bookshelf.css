@@ -141,5 +141,56 @@
   text-align: justify;
   line-height: 1.6;
 }
+.user-profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 30px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
 
+.avatar-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #3e6a73;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+.user-profile .profile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.user-profile .edit-btn,
+.user-profile .delete-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+}
+
+.user-profile .edit-btn {
+  background-color: #3e6a73;
+}
+
+.user-profile .delete-btn {
+  background-color: #b8372f;
+}
 

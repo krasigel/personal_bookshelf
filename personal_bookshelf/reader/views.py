@@ -1,8 +1,10 @@
-from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import CustomUser
-from .forms import CustomUserCreationForm, CustomLoginForm
+from .forms import CustomUserCreationForm, CustomLoginForm, EditProfileForm
 from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth import get_user_model
 
 
 class ReaderRegisterView(CreateView):
@@ -21,3 +23,19 @@ class ReaderLoginView(LoginView):
 class ReaderLogoutView(LogoutView):
     next_page = 'login'
 
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = CustomUser
+    form_class = EditProfileForm
+    template_name = 'reader/edit_profile.html'
+    success_url = reverse_lazy('bookshelf')
+
+    def get_object(self):
+        return self.request.user
+
+class DeleteProfileView(LoginRequiredMixin, DeleteView):
+    model = CustomUser
+    template_name = 'reader/delete_profile.html'
+    success_url = reverse_lazy('register')
+
+    def get_object(self):
+        return self.request.user

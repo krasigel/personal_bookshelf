@@ -44,7 +44,7 @@
 .news-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-start;
   padding: 20px;
   width: 350px;
   height: 600px;
@@ -79,15 +79,20 @@
 
 .news-button {
   text-decoration: none;
+  align-self: flex-start;
   background: #3e6a73;
   color: white;
   padding: 4px 8px;
   border-radius: 3px;
   font-size: 12px;
+  text-align: center;
+  margin-top: auto;
   margin-bottom: 10px;
 }
 
 .news-button a {
+  display: block;
+  padding: 4px 8px;
   color: #f9f9f9;
   text-decoration: none;
 }
