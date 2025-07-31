@@ -36,9 +36,9 @@ class Book(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return self.title
+
 
 class Bookshelf(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bookshelves')
@@ -49,11 +49,11 @@ class Bookshelf(models.Model):
     def __str__(self):
         return f"{self.title} by {self.owner.username}"
 
+
 class BookshelfItem(models.Model):
     bookshelf = models.ForeignKey('Bookshelf', on_delete=models.CASCADE, related_name='items')
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return f"{self.book.title} in {self.bookshelf.title}"

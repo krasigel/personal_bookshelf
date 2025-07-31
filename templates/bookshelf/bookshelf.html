@@ -9,15 +9,7 @@
    
 {% endblock %}
 
-{% block title %}
-  <title>
-    {% if bookshelf_owner %}
-      {{ bookshelf_owner.username|capfirst }}'s Bookshelf
-    {% else %}
-      My Bookshelf
-    {% endif %}
-  </title>
-{% endblock %}
+
 
 {% block content %}
 
