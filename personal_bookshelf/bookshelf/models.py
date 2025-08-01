@@ -47,7 +47,7 @@ class Bookshelf(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.title} by {self.owner.username}"
+        return f"{self.title} by {self.owner}"
 
 
 class BookshelfItem(models.Model):

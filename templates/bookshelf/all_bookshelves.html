@@ -14,7 +14,7 @@
           <input type="text" name="q" placeholder="Search by title or author..." value="{{ query }}" class="book-search-input">
           <button type="submit" class="book-search-button">Search</button>
         </form>
-  </div>  
+  </div>
 {% endblock %}
 
 {% block content %}
@@ -22,9 +22,13 @@
         <div class="bookshelf-cards">
               {% for shelf in bookshelves %}
                  <div class="bookshelf-card">
-                     <h3>{{ shelf.owner.username|capfirst }}'s Bookshelf</h3>
+                     <h3>{{ shelf.title|capfirst }}</h3>
+                     <img src="{{ shelf.owner.avatar.url }}" alt="{{ shelf.owner.username }}'s avatar" class="avatar-small">
+                     <p style="font-size: 12px; color: #3e6a73">{{ shelf.description    }}</p>
                      <p><strong>Age:</strong> {{ shelf.owner.age }}</p>
                      <p><strong>Favourite genres:</strong> {{ shelf.owner.favourite_genres|default:"N/A" }}</p>
+                     <p style="font-size: 10px; color: #d94b41">Created at: {{ shelf.created_at}}</p>
+                                   
                      <a href="{% url 'bookshelf_detail' shelf.id %}" class="view-button">View Bookshelf</a>
                  </div>
               {% empty %}

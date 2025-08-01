@@ -24,7 +24,7 @@ class BookCreateView(LoginRequiredMixin, CreateView):
             owner=self.request.user,
             defaults={
                 "title": f"{self.request.user.username}'s Bookshelf",
-                "description": "My personal bookshelf"
+                "description": f"The reviews and images are the property of {self.request.user.username}."
             }
         )
         BookshelfItem.objects.create(
@@ -149,7 +149,6 @@ def rate_book(request, pk):
             return redirect("bookshelf_detail", pk=bookshelf_item.bookshelf.pk)
         else:
             return redirect("bookshelf")
-
 
     user_rating = BookRating.objects.filter(book=book, user=request.user).first()
     avg_rating = book.ratings.aggregate(Avg("rating"))["rating__avg"]

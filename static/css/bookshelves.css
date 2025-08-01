@@ -1,6 +1,35 @@
+.book-search {
+  margin: 40px auto 20px auto;
+  text-align: center;
+}
+
+.book-search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.book-search-button {
+  padding: 10px 20px;
+  background-color: #3e6a73;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-search-button:hover {
+  background-color: #d94b41;
+}
 .bookshelf-cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -29,6 +58,15 @@
 
 }
 
+.bookshelf-card .avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3e6a73;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
 .bookshelf-card .view-button {
   display: inline-block;
   padding: 8px 12px;
@@ -42,6 +80,7 @@
 .bookshelf-card .view-button:hover {
   background-color: #d94b41;
 }
+
 
 
 
