@@ -1,0 +1,54 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h2>Search Results for "{{ query }}"</h2>
+
+  {% if results %}
+    <div class="bookshelf-container">
+      {% for item in results %}
+        {% with b=item.book %}
+          <div class="book-card">
+              <p><strong>#{{ forloop.counter }}</strong></p>
+              <img src="{{ b.image.url }}" alt="Book cover">
+              <h3 class="book-title">{{ b.title }}</h3>
+              <p class="book-author">by {{ b.author }}</p>
+
+              Average Rating:
+              {% if item.avg_rating %}
+                  {% for i in "12345" %}
+                      {% if i|add:""|add:"0" <= item.avg_rating %}
+                          ⭐
+                      {% else %}
+                          ☆
+                      {% endif %}
+                  {% endfor %}
+              {% else %}
+                  No ratings yet.
+              {% endif %}
+
+              <a href="{% url 'book_rate' b.pk %}">Rate this book</a>
+              <p class="book-genre">Genre: {{ b.genre }}</p>
+              {% if b.is_recommended %}
+                  <p class="recommended-status">⭐ Recommended</p>
+              {% else %}
+                  <p class="norecommended-status">❌ Not Recommended</p>
+              {% endif %}
+              <p class="review-text">{{ b.review|truncatechars:150 }}...</p>
+              <p><strong>From:</strong> {{ item.bookshelf.title|capfirst }}</p>
+              <div class="card-buttons">
+                  <a href="{% url 'book_detail' b.pk %}">Read more</a>
+              </div>
+          </div>
+        {% endwith %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No books found.</p>
+  {% endif %}
+{% endblock %}

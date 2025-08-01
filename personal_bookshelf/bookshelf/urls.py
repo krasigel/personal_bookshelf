@@ -1,7 +1,7 @@
 from django.urls import path
 
 from personal_bookshelf.bookshelf.views import BookDeleteView, BookCreateView, BookUpdateView, MyBookshelfView, \
-    BookDetailView, all_bookshelves, SpecificBookshelfView, rate_book
+    BookDetailView, all_bookshelves, SpecificBookshelfView, rate_book, search_bookshelves
 
 urlpatterns = [
     path("",  MyBookshelfView.as_view(), name='bookshelf'),
@@ -12,6 +12,8 @@ urlpatterns = [
     path('<int:pk>/detail/', BookDetailView.as_view(), name='book_detail'),
     path("view/<int:pk>/", SpecificBookshelfView.as_view(), name="bookshelf_detail"),
     path("<int:pk>/rate/", rate_book, name="book_rate"),
+    path('bookshelves/search/', search_bookshelves, name='bookshelf_search'),
+
 
 
 

@@ -12,8 +12,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
-  width: 300px;        /* фиксирана ширина за еднакви колони */
-  min-height: 250px;   /* фиксирана височина */
+  width: 300px;
+  min-height: 250px;
   margin: 10px;
 }
 
@@ -25,7 +25,7 @@
 
 .bookshelf-card p {
   font-size: 18px;
-  flex-grow: 1;   /* заема наличното място и избутва бутона надолу */
+  flex-grow: 1;
 
 }
 
@@ -42,4 +42,7 @@
 .bookshelf-card .view-button:hover {
   background-color: #d94b41;
 }
+
+
+
 

@@ -2,6 +2,8 @@ from django import forms
 from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+from personal_bookshelf.bookshelf.widgets import NoLinkClearableFileInput
+
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
@@ -9,12 +11,17 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
         label='Email'
     )
-    avatar = forms.ImageField(required=False)
+
+    avatar = forms.ImageField(
+        required=False,
+        widget=NoLinkClearableFileInput(attrs={'class': 'form-control'})
+    )
 
     class Meta:
         model = CustomUser
         fields = ['avatar', 'username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'age', 'favourite_genres']
         widgets = {
+
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -30,11 +37,15 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(
+        required=False,
+        widget=NoLinkClearableFileInput(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'age', 'favourite_genres', 'avatar']
         widgets = {
-            'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),

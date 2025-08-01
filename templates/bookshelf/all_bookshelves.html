@@ -1,31 +1,36 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
-{% block css_files%}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bookshelves.css' %}">
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bookshelves.css' %}">
 {% endblock %}
 
 {% block title %}
-    <h1>All Bookshelves</h1>
+  <h1>All Bookshelves</h1>
+  <div class="book-search">
+        <form method="get" action="{% url 'bookshelf_search' %}">
+          <input type="text" name="q" placeholder="Search by title or author..." value="{{ query }}" class="book-search-input">
+          <button type="submit" class="book-search-button">Search</button>
+        </form>
+  </div>  
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  
-  <div class="bookshelf-cards">
-    {% for shelf in bookshelves %}
-      <div class="bookshelf-card">
-        <h3>{{ shelf.owner.username|capfirst }}'s Bookshelf</h3>
-        <p><strong>Age:</strong> {{ shelf.owner.age }}</p>
-        <p><strong>Favourite genres:</strong> {{ shelf.owner.favourite_genres|default:"N/A" }}</p>
-        <a href="{% url 'bookshelf_detail' shelf.id %}" class="view-button">View Bookshelf</a>
-
-      </div>
-    {% empty %}
-      <p>No bookshelves found.</p>
-    {% endfor %}
-  </div>
-</div>
+    <div class="container">
+        <div class="bookshelf-cards">
+              {% for shelf in bookshelves %}
+                 <div class="bookshelf-card">
+                     <h3>{{ shelf.owner.username|capfirst }}'s Bookshelf</h3>
+                     <p><strong>Age:</strong> {{ shelf.owner.age }}</p>
+                     <p><strong>Favourite genres:</strong> {{ shelf.owner.favourite_genres|default:"N/A" }}</p>
+                     <a href="{% url 'bookshelf_detail' shelf.id %}" class="view-button">View Bookshelf</a>
+                 </div>
+              {% empty %}
+                  <p>No bookshelves found.</p>
+              {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+
