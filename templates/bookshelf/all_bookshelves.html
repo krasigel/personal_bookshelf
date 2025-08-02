@@ -22,11 +22,12 @@
         <div class="bookshelf-cards">
               {% for shelf in bookshelves %}
                  <div class="bookshelf-card">
-                     <h3>{{ shelf.title|capfirst }}</h3>
+                     <h3>{{ shelf.title|capfirst}}</h3>
+                     <p style="font-size: 14px; color: #3e6a73">Total reviews: {{ shelf.owner.published_reviews }} </p>
                      <img src="{{ shelf.owner.avatar.url }}" alt="{{ shelf.owner.username }}'s avatar" class="avatar-small">
                      <p style="font-size: 12px; color: #3e6a73">{{ shelf.description    }}</p>
-                     <p><strong>Age:</strong> {{ shelf.owner.age }}</p>
-                     <p><strong>Favourite genres:</strong> {{ shelf.owner.favourite_genres|default:"N/A" }}</p>
+                     <p>Age: {{ shelf.owner.age }}</p>
+                     <p>Favourite genres: {{ shelf.owner.favourite_genres|lower|default:"N/A" }}</p>
                      <p style="font-size: 10px; color: #d94b41">Created at: {{ shelf.created_at}}</p>
                                    
                      <a href="{% url 'bookshelf_detail' shelf.id %}" class="view-button">View Bookshelf</a>

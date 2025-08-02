@@ -32,6 +32,9 @@ class BookCreateView(LoginRequiredMixin, CreateView):
             book=self.object
         )
 
+        self.request.user.published_reviews = Book.objects.filter(owner=self.request.user).count()
+        self.request.user.save()
+
         return response
 
 
@@ -54,6 +57,14 @@ class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.get_object().owner == self.request.user
+
+    def form_valid(self, form):
+        book = self.get_object()
+        owner = book.owner
+        if owner.published_reviews > 0:
+            owner.published_reviews -= 1
+            owner.save()
+        return super().form_valid(form)
 
 
 class BookDetailView(DetailView):
@@ -91,11 +102,18 @@ class MyBookshelfView(LoginRequiredMixin, ListView):
             Book.objects
             .filter(owner=self.request.user)
             .annotate(avg_rating=Avg('ratings__rating'))
+            .order_by('-created_at')
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bookshelf_owner'] = self.request.user
+        context['published_reviews'] = Book.objects.filter(owner=self.request.user).count()
+        return context
 
 
 def all_bookshelves(request):
-    bookshelves = Bookshelf.objects.select_related('owner')
+    bookshelves = Bookshelf.objects.select_related('owner').order_by('-created_at')
 
     return render(request, 'bookshelf/all_bookshelves.html', {'bookshelves': bookshelves})
 
@@ -113,6 +131,7 @@ class SpecificBookshelfView(ListView):
             .filter(bookshelf=bookshelf)
             .select_related('book')
             .annotate(avg_rating=Avg('book__ratings__rating'))
+            .order_by('-book__created_at')
 
         )
 
