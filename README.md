@@ -97,7 +97,9 @@ cd personal_bookshelf
 ### 2. Create and activate a virtual environment
 
 python -m venv .venv
+
 source .venv/bin/activate     # On macOS/Linux
+
 .venv\Scripts\activate        # On Windows
 
 ---
@@ -113,7 +115,9 @@ Make sure PostgreSQL is installed and running.
 Create a database:
 
 CREATE DATABASE personal_bookshelf;
+
 Update DATABASES in settings.py with your DB credentials.
+
 
 DATABASES = {
     'default': {
