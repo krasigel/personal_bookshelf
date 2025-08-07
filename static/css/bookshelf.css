@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 .bookshelf-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +9,7 @@
   gap: 30px;
   padding: 20px;
   max-width: 100%;
+
 }
 
 .book-card {
@@ -15,25 +17,33 @@
   flex-direction: column;
   align-items: flex-start;
   width: 350px;
-  height: auto;
+  max-width: 100%;
   background: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin: 0;
   padding: 20px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  ;
-
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .book-card img {
-  width: 200px;
-  height: 250px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   margin-bottom: 10px;
   border-radius: 4px;
 }
-
+.book-card .book-title,
+.book-card .book-author,
+.book-card .book-genre
+.book-card .review-text {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
 .book-card .book-title {
   font-size: 16px;
   font-weight: bold;
@@ -44,26 +54,26 @@
 .book-card .book-author {
   font-size: 12px;
   color: #555;
-  margin: 0 0 1px 0;
+
 }
 
 .book-card .book-genre {
   font-size: 12px;
   color: #3e6a73;
-
 }
 
-.book-card .review-text .article-extract {
+.book-card .review-text {
   font-size: 14px;
   color: #333;
   flex-grow: 1;
-  margin: 0 0 5px 0;
+  margin: 5px;
+
 }
 
 .book-card .card-buttons {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: auto;
 }
 
 .book-card .card-buttons a {
@@ -78,6 +88,7 @@
 .book-card .card-buttons a:hover {
   background: #d94b41;
 }
+
 .add-book-button {
   margin-left: 50px;
   margin-bottom: 20px;
@@ -103,11 +114,13 @@
   color: #d94b41;
   margin-bottom: 8px;
 }
+
 .book-card .norecommended-status {
   font-size: 13px;
   color: #3e6a73;
   margin-bottom: 8px;
 }
+
 .book-detail-container {
   max-width: 700px;
   margin: 40px auto;
@@ -128,19 +141,23 @@
   font-size: 32px;
   color: #3e6a73;
   margin-bottom: 10px;
+
 }
 
 .book-detail-meta {
   font-size: 14px;
   color: #b8372f;
   margin-bottom: 30px;
+
 }
 
 .book-detail-review {
   font-size: 18px;
   text-align: justify;
   line-height: 1.6;
+
 }
+
 .user-profile-container {
   display: flex;
   flex-wrap: wrap;
@@ -148,6 +165,7 @@
   gap: 30px;
   padding: 20px;
 }
+
 .user-profile {
   display: flex;
   align-items: center;
@@ -170,6 +188,7 @@
 .user-info p {
   margin: 5px 0;
 }
+
 .user-profile .profile-buttons {
   display: flex;
   flex-direction: column;

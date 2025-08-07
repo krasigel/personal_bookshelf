@@ -1,3 +1,4 @@
+
 .form-container {
   background: #3e6a73;
   color: white;
@@ -25,6 +26,7 @@
   font-size: 14px;
 }
 
+
 .form-container input,
 .form-container select,
 .form-container textarea {
@@ -33,8 +35,11 @@
   border-radius: 4px;
   font-size: 14px;
   margin-bottom: 12px;
-
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
+
 
 .form-container input[type="file"] {
   padding: 3px;
@@ -55,8 +60,7 @@
 }
 
 .form-container button:hover {
-  background: #b8372f;
-
+  background: #a32e27;
 }
 
 .form-container a {
@@ -66,6 +70,7 @@
 .form-container a:hover {
   color: #ffcccb;
 }
+
 .button-login {
   background-color: #d94b41;
   color: white;
@@ -84,6 +89,7 @@
   background-color: #3e6a73;
 }
 
+
 .form-errors {
   background-color: #ffe6e6;
   border: 1px solid #981c1c;
@@ -93,4 +99,3 @@
   border-radius: 6px;
   font-size: 14px;
 }
-

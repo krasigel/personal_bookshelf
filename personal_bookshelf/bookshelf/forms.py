@@ -12,4 +12,8 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['image', 'title', 'author', 'genre', 'review', 'is_recommended']
+        widgets = {
+            'title': forms.TextInput(attrs={'maxlength': '100'}),
+            'author': forms.TextInput(attrs={'maxlength': '50'}),
 
+        }

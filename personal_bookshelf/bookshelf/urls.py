@@ -14,7 +14,4 @@ urlpatterns = [
     path("<int:pk>/rate/", rate_book, name="book_rate"),
     path('bookshelves/search/', search_bookshelves, name='bookshelf_search'),
 
-
-
-
 ]

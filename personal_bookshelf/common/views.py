@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.views.generic import DetailView
 
@@ -21,3 +22,6 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+def test_404_view(request):
+    return HttpResponseNotFound(render(request, 'common/404.html'))
