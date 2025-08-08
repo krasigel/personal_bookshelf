@@ -10,6 +10,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ("Additional info", {"fields": ("age", "favourite_genres", "published_reviews")}),
     )
+
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("Additional info", {"fields": ("age", "favourite_genres")}),
     )

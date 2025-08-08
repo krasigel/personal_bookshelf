@@ -1,6 +1,7 @@
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
+from django.db.models import UniqueConstraint
 
 from personal_bookshelf.bookshelf.validators import validate_image_extension
 
@@ -62,9 +63,16 @@ class BookshelfItem(models.Model):
 class BookRating(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="ratings")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField()
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('book', 'user')
+        constraints = [
+            UniqueConstraint(
+                fields=['book', 'user'],
+                name='unique_book_user_rating')
+        ]
+
 

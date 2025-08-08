@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block content %}
+    {% load rating %}
+    {% num_range 1 5 as stars %}
+    
     <div class="book-detail-container">
     <h1 class="book-detail-title">{{ book.title }}</h1>
     <p class="book-detail-meta">
@@ -22,15 +25,15 @@
         <h3>Average Rating:</h3>
             {% if avg_rating %}
                 <p>
-                {% for i in "12345" %}
-                    {% if i|add:"0" <= avg_rating %}
-                        ⭐
-                    {% else %}
-                        ☆
-                    {% endif %}
-                {% endfor %}
-                ({{ avg_rating|floatformat:1 }} / 5)
-                </p>
+                    {% for i in stars %}
+                        {% if avg_rating|filled:i %}
+                            <span class="stars">★</span>
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                    ({{ avg_rating|floatformat:1 }} / 5)
+                </p>    
             {% else %}
                 <p>No ratings yet.</p>
             {% endif %}

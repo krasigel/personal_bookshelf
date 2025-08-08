@@ -1,19 +1,19 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
+
 {% block css_files %}
     
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <link rel="stylesheet" href="{% static 'css/form.css' %}"> 
   <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">  
-   
-   
+  
 {% endblock %}
 
-
-
 {% block content %}
-
+{% load rating %}
+{% num_range 1 5 as stars %}
+    
 <h1 style="margin-left:30px;">
   {% if bookshelf_owner %}
     {{ bookshelf_owner.username|capfirst }}'s Bookshelf
@@ -61,18 +61,24 @@
                 <p class="book-author">by {{ b.author }}</p>
 
                 Average Rating:
-                {% if obj.avg_rating %}
-                    {% for i in "12345" %}
-                        {% if i|add:""|add:"0" <= obj.avg_rating %}
-                            ⭐
-                        {% else %}
-                            ☆
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    No ratings yet.
-                {% endif %}
-
+                
+                {% with avg=b.avg_rating|default:obj.avg_rating %}
+                    
+                    {% if avg %}
+                        <p>
+                            {% for i in stars %}
+                                {% if avg|filled:i %}
+                                    <span class="stars">★</span>
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    {% else %}
+                        <p>No ratings yet.</p>
+                    {% endif %}
+                {% endwith %}
+                    
                 <a href="{% url 'book_rate' b.pk %}">Rate this book</a>
                 <p class="book-genre">Genre: {{ b.genre }}</p>
                 {% if b.is_recommended %}
@@ -102,18 +108,19 @@
 
                 <p class="book-rating">
                     Average Rating:
-                    {% if b.avg_rating %}
-                        {% for i in "12345" %}
-                            {% if i|add:""|add:"0" <= b.avg_rating %}
-                                ⭐
-                            {% else %}
-                                ☆
-                            {% endif %}
-                        {% endfor %}
-                        ({{ b.avg_rating|floatformat:1 }})
-                    {% else %}
-                        No ratings yet.
-                    {% endif %}
+                    {% with avg=b.avg_rating|default:obj.avg_rating %}
+                        {% if avg %}
+                            {% for i in stars %}
+                                {% if avg|filled:i %}
+                                    ⭐
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No ratings yet.
+                        {% endif %}
+                    {% endwith %}
                 </p>
                 <a href="{% url 'book_rate' b.pk %}">Rate this book</a>
                 <p class="book-genre">Genre: {{ b.genre }}</p>
