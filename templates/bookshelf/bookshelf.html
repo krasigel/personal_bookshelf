@@ -35,7 +35,7 @@
               <p><strong>Email:</strong> {{ request.user.email }}</p>
               <p><strong>Age:</strong> {{ request.user.age }}</p>
               <p><strong>Favourite Genres:</strong> {{ request.user.favourite_genres }}</p>
-              <p>Published Reviews: {{ request.user.published_reviews }}</p>  
+              <p><strong>Published Reviews:</strong> {{ request.user.published_reviews }}</p>  
             </div>
             <div class="profile-buttons">
               <a href="{% url 'edit_profile' %}" class="edit-btn">Edit Profile</a>
